@@ -263,8 +263,152 @@
                 </div>
             </div>
         </section>
-
-        <!-- Custom Alert/Modal for Features -->
+        
+                    <!-- Custom Alert/Modal for Features -->
         <div id="actionModal" class="fixed inset-0 bg-black bg-opacity-50 dark:bg-opacity-70 backdrop-blur-sm z-50 hidden items-center justify-center p-4 transition-opacity duration-300">
             <div class="bg-white dark:bg-dark-card p-6 rounded-xl shadow-2xl max-w-sm w-full transform transition-all scale-95 duration-300">
-                <h3 id="modalTitle" class="text-xl font-heading font-bold mb-3 text-primary dark:text-dark-
+                <h3 id="modalTitle" class="text-xl font-heading font-bold mb-3 text-primary dark:text-dark-primary">Action Success!</h3>
+                <p id="modalMessage" class="text-gray-700 dark:text-gray-300 mb-4">You have successfully downloaded the requested file.</p>
+                <button id="closeModal" class="w-full px-4 py-2 bg-primary text-white font-semibold rounded-lg hover:bg-blue-600 transition duration-200">
+                    Got it!
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- 6. Footer -->
+    <footer id="footer" class="bg-text-dark dark:bg-black py-8 transition duration-300">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-8 mb-6">
+                <a href="#" class="text-gray-300 hover:text-primary transition duration-200">Contact Us</a>
+                <a href="#" class="text-gray-300 hover:text-primary transition duration-200">Privacy Policy</a>
+                <a href="#" class="text-secondary hover:text-yellow-400 transition duration-200 font-semibold">Join Telegram Group!</a>
+            </div>
+
+            <p class="text-gray-400 text-sm mt-4">
+                &copy; <span id="currentYear"></span> MereSaathPadhlo. All rights reserved.
+            </p>
+            <p class="text-lg font-heading font-semibold text-secondary mt-2">
+                Made with ❤️ for Students
+            </p>
+
+            <!-- SEO & Analytics Placeholder -->
+            <div class="text-xs text-gray-500 dark:text-gray-600 mt-6">
+                <!-- Placeholder for Google Analytics Code (Example) -->
+                <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script> -->
+                <!-- Placeholder for Google Search Console Verification -->
+                <!-- <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE" /> -->
+                <p>Analytics/SEO tags would go here.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Interactivity -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const body = document.body;
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            const sunIcon = document.getElementById('sunIcon');
+            const moonIcon = document.getElementById('moonIcon');
+            const mobileMenuButton = document.getElementById('mobileMenuButton');
+            const closeMenuButton = document.getElementById('closeMenuButton');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const actionModal = document.getElementById('actionModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalMessage = document.getElementById('modalMessage');
+            const closeModal = document.getElementById('closeModal');
+
+            // 1. Dark Mode Logic
+            const isDarkMode = localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+            if (isDarkMode) {
+                body.classList.add('dark');
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            } else {
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            }
+
+            darkModeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark');
+                const isDark = body.classList.contains('dark');
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+
+                // Toggle icons visibility
+                sunIcon.classList.toggle('hidden', isDark);
+                moonIcon.classList.toggle('hidden', !isDark);
+            });
+
+            // 2. Mobile Menu Logic
+            const toggleMenu = () => {
+                const isExpanded = mobileMenu.classList.toggle('-translate-x-full');
+                // The fixed menu is visible when -translate-x-full is NOT present
+                if (!isExpanded) {
+                    body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+                } else {
+                    body.style.overflow = '';
+                }
+            };
+
+            mobileMenuButton.addEventListener('click', toggleMenu);
+            closeMenuButton.addEventListener('click', toggleMenu);
+
+            // Close menu when a link is clicked
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', toggleMenu);
+            });
+
+            // 3. Simulated Feature Logic (Download/Share/Modal)
+            window.simulateAction = function(actionType, itemName) {
+                actionModal.classList.remove('hidden');
+                actionModal.classList.add('flex');
+
+                if (actionType === 'download') {
+                    modalTitle.textContent = 'Download Started!';
+                    modalMessage.textContent = `"${itemName}" is now downloading. Happy studying!`;
+                } else if (actionType === 'share') {
+                    modalTitle.textContent = 'Link Copied!';
+                    // Use document.execCommand('copy') for better compatibility in iframe/browser environments
+                    const shareText = `Check out this amazing study material: ${itemName} on MereSaathPadhlo! [Link to page would go here]`;
+                    
+                    try {
+                        const tempInput = document.createElement('textarea');
+                        tempInput.value = shareText;
+                        document.body.appendChild(tempInput);
+                        tempInput.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(tempInput);
+                        modalMessage.textContent = `The sharing link for "${itemName}" has been copied to your clipboard. Share it with your friends!`;
+                    } catch (err) {
+                        modalMessage.textContent = `We couldn't auto-copy the link for "${itemName}", but you can find it soon!`;
+                    }
+                }
+
+                // Add animation class
+                actionModal.querySelector('div').classList.remove('scale-95');
+                actionModal.querySelector('div').classList.add('scale-100');
+            };
+
+            closeModal.addEventListener('click', () => {
+                actionModal.classList.add('hidden');
+                actionModal.classList.remove('flex');
+            });
+            
+            // Close modal on outside click
+            actionModal.addEventListener('click', (e) => {
+                if (e.target === actionModal) {
+                    closeModal.click();
+                }
+            });
+
+            // Set current year in footer
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+        });
+    </script>
+</body>
+</html>
+
+
+    
