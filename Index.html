@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- SEO Optimization -->
+    <title>MereSaathPadhlo | Notes, Question Papers & Study Material</title>
+    <meta name="description" content="Best platform for free study materials, notes, previous year papers, and exam preparation. Study Smart, Not Hard.">
+    <meta name="keywords" content="study material, free notes, question papers, exam tips, student guide, MereSaathPadhlo">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Poppins (Heading) and Inter (Body) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Custom Tailwind Configuration for Colors and Fonts -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class', // Enable dark mode based on the 'dark' class
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1E88E5', // Blue
+                        secondary: '#FFC107', // Yellow
+                        'background-light': '#F9FAFB',
+                        'text-dark': '#1B1B1B',
+                        // Dark Mode Colors
+                        'dark-bg': '#121212',
+                        'dark-card': '#1f1f1f',
+                        'dark-text': '#E0E0E0',
+                        'dark-primary': '#42A5F5',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Roboto', 'sans-serif'],
+                        heading: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Base styles for light mode */
+        body {
+            background-color: #F9FAFB;
+            color: #1B1B1B;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Dark mode styles */
+        .dark body {
+            background-color: #121212;
+            color: #E0E0E0;
+        }
+
+        /* Apply Poppins to elements with font-heading class */
+        .font-heading {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Custom Scrollbar for better aesthetics (optional but nice) */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #1E88E5;
+            border-radius: 4px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background-color: #42A5F5;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-50 shadow-md bg-white dark:bg-dark-card transition duration-300">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="text-2xl font-heading font-extrabold text-primary">MereSaathPadhlo</a>
+
+            <!-- Desktop Menu (Hidden on mobile) -->
+            <nav class="hidden md:flex space-x-6">
+                <a href="#categories" class="text-text-dark dark:text-dark-text hover:text-primary transition duration-200 font-semibold">Categories</a>
+                <a href="#latest" class="text-text-dark dark:text-dark-text hover:text-primary transition duration-200 font-semibold">Latest</a>
+                <a href="#about" class="text-text-dark dark:text-dark-text hover:text-primary transition duration-200 font-semibold">About</a>
+                <a href="#footer" class="text-text-dark dark:text-dark-text hover:text-primary transition duration-200 font-semibold">Contact</a>
+            </nav>
+
+            <!-- Toggle Buttons (Mobile Menu & Dark Mode) -->
+            <div class="flex items-center space-x-3">
+                
+                <!-- Dark Mode Toggle -->
+                <button id="darkModeToggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-200">
+                    <!-- Sun icon (Light mode default) -->
+                    <svg id="sunIcon" class="w-6 h-6 text-secondary dark:text-dark-text" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    <!-- Moon icon (Dark mode) -->
+                    <svg id="moonIcon" class="w-6 h-6 text-primary dark:text-dark-text hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                </button>
+
+                <!-- Mobile Menu Button (Hamburger) -->
+                <button id="mobileMenuButton" class="md:hidden p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 text-text-dark dark:text-dark-text transition duration-200">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu (Off-Canvas Style) -->
+        <nav id="mobileMenu" class="md:hidden fixed inset-0 z-40 bg-white dark:bg-dark-bg transform -translate-x-full transition duration-300 ease-in-out p-6 shadow-xl">
+            <div class="flex justify-between items-center mb-6">
+                <span class="text-2xl font-heading font-extrabold text-primary">Menu</span>
+                <button id="closeMenuButton" class="p-2 text-text-dark dark:text-dark-text hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <div class="flex flex-col space-y-4">
+                <a href="#categories" class="text-xl font-semibold text-text-dark dark:text-dark-text hover:text-primary transition duration-200">Categories</a>
+                <a href="#latest" class="text-xl font-semibold text-text-dark dark:text-dark-text hover:text-primary transition duration-200">Latest Uploads</a>
+                <a href="#about" class="text-xl font-semibold text-text-dark dark:text-dark-text hover:text-primary transition duration-200">About Us</a>
+                <a href="#footer" class="text-xl font-semibold text-text-dark dark:text-dark-text hover:text-primary transition duration-200">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="min-h-screen">
+        
+        <!-- 1. Hero Section -->
+        <section id="hero" class="py-16 md:py-24 bg-background-light dark:bg-dark-bg transition duration-300">
+            <div class="container mx-auto px-4 text-center">
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-heading font-extrabold text-text-dark dark:text-dark-text leading-tight mb-4">
+                    Study Smart, Not Hard – <span class="text-primary">Join MereSaathPadhlo!</span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto mb-8">
+                    Free notes, question papers, and exam tips for students. Your one-stop shop for better learning.
+                </p>
+
+                <!-- Call to Action Button -->
+                <a href="#categories" class="inline-block px-8 py-3 text-lg font-bold rounded-full text-white bg-primary hover:bg-blue-700 transition duration-300 shadow-lg transform hover:scale-105">
+                    Start Learning Today!
+                </a>
+            </div>
+        </section>
+
+        <!-- 2. Search Bar Section -->
+        <section class="py-10 bg-white dark:bg-dark-card transition duration-300">
+            <div class="container mx-auto px-4">
+                <div class="max-w-xl mx-auto">
+                    <div class="relative">
+                        <input type="search" placeholder="Search Notes or Question Papers..." class="w-full p-4 pl-12 rounded-lg border-2 border-primary focus:border-blue-600 focus:ring-4 focus:ring-primary/20 bg-white dark:bg-dark-bg dark:text-dark-text transition duration-300 shadow-md outline-none text-lg">
+                        <div class="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400">
+                            <!-- Search Icon (Lucide-react equivalent) -->
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Category Cards -->
+        <section id="categories" class="py-16 bg-background-light dark:bg-dark-bg transition duration-300">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-heading font-bold text-center mb-10 text-text-dark dark:text-dark-text">What are you looking for?</h2>
+
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+
+                    <!-- Card Template -->
+                    <div class="category-card p-6 text-center rounded-xl bg-white dark:bg-dark-card shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition duration-300 cursor-pointer border-b-4 border-primary dark:border-dark-primary">
+                        <span class="text-4xl mb-3 block text-primary dark:text-dark-primary">📝</span>
+                        <h3 class="text-lg font-heading font-semibold text-text-dark dark:text-dark-text">Notes</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Detailed, easy summaries.</p>
+                    </div>
+
+                    <div class="category-card p-6 text-center rounded-xl bg-white dark:bg-dark-card shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition duration-300 cursor-pointer border-b-4 border-secondary">
+                        <span class="text-4xl mb-3 block text-secondary">❓</span>
+                        <h3 class="text-lg font-heading font-semibold text-text-dark dark:text-dark-text">Question Papers</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Practice for perfect scores.</p>
+                    </div>
+
+                    <div class="category-card p-6 text-center rounded-xl bg-white dark:bg-dark-card shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition duration-300 cursor-pointer border-b-4 border-primary dark:border-dark-primary">
+                        <span class="text-4xl mb-3 block text-primary dark:text-dark-primary">📘</span>
+                        <h3 class="text-lg font-heading font-semibold text-text-dark dark:text-dark-text">Syllabus</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Know exactly what to study.</p>
+                    </div>
+
+                    <div class="category-card p-6 text-center rounded-xl bg-white dark:bg-dark-card shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition duration-300 cursor-pointer border-b-4 border-secondary">
+                        <span class="text-4xl mb-3 block text-secondary">🧠</span>
+                        <h3 class="text-lg font-heading font-semibold text-text-dark dark:text-dark-text">MCQ Practice</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Test your knowledge fast.</p>
+                    </div>
+
+                    <div class="category-card p-6 text-center rounded-xl bg-white dark:bg-dark-card shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition duration-300 cursor-pointer border-b-4 border-primary dark:border-dark-primary">
+                        <span class="text-4xl mb-3 block text-primary dark:text-dark-primary">💡</span>
+                        <h3 class="text-lg font-heading font-semibold text-text-dark dark:text-dark-text">Study Tips</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Learn to manage time better.</p>
+                    </div>
+
+                    <div class="category-card p-6 text-center rounded-xl bg-white dark:bg-dark-card shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition duration-300 cursor-pointer border-b-4 border-secondary">
+                        <span class="text-4xl mb-3 block text-secondary">🔔</span>
+                        <h3 class="text-lg font-heading font-semibold text-text-dark dark:text-dark-text">Results / Updates</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Stay informed, never miss a date.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Latest Uploads Section -->
+        <section id="latest" class="py-16 bg-white dark:bg-dark-card transition duration-300">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-heading font-bold text-center mb-10 text-text-dark dark:text-dark-text">📚 Latest Uploads Just For You</h2>
+                <p class="text-center text-gray-600 dark:text-gray-400 mb-8">We add new materials every week! Grab them fast.</p>
+
+                <div class="max-w-4xl mx-auto space-y-4">
+                    
+                    <!-- File Card 1 -->
+                    <div class="file-card flex flex-col md:flex-row justify-between items-start md:items-center p-4 rounded-xl bg-background-light dark:bg-dark-bg shadow-sm transition duration-300 hover:shadow-md">
+                        <div class="mb-2 md:mb-0">
+                            <p class="font-semibold text-lg text-primary dark:text-dark-primary">Physics (Class 12) - Chapter 3 Notes</p>
+                            <span class="text-sm text-gray-500 dark:text-gray-400">Notes | Updated: Today, 10:30 AM</span>
+                        </div>
+                        <div class="flex space-x-3 mt-2 md:mt-0">
+                            <button onclick="simulateAction('download', 'Physics Notes')" class="flex items-center space-x-1 px-4 py-2 text-sm font-semibold rounded-full text-white bg-primary hover:bg-blue-600 transition duration-200">
+                                <!-- Download Icon -->
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                <span>Download</span>
+                            </button>
+                            <button onclick="simulateAction('share', 'Physics Notes')" class="p-2 rounded-full text-text-dark dark:text-dark-text bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition duration-200">
+                                <!-- Share Icon -->
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.882 14.412 9 15.11 9 15c0 .642-.257 1.284-.717 1.743l-3.321 3.321a1.25 1.25 0 01-1.768 0 1.25 1.25 0 010-1.768l3.32-3.32C6.716 12.757 6.074 12.5 5.432 12.5c-.68 0-1.32.222-1.874.551M15.316 10.658c-.198-1.07-.316-1.768-.316-1.768v-1.25A2.5 2.5 0 0011.25 5h-1.25c-.47 0-.91.184-1.25.514M16 15c0 1.233-.52 2.39-1.385 3.256L10.75 18"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- File Card 2 -->
+                    <div class="file-card flex flex-col md:flex-row justify-between items-start md:items-center p-4 rounded-xl bg-background-light dark:bg-dark-bg shadow-sm transition duration-300 hover:shadow-md">
+                        <div class="mb-2 md:mb-0">
+                            <p class="font-semibold text-lg text-primary dark:text-dark-primary">Maths (Term 1) - Previous Year Question Paper</p>
+                            <span class="text-sm text-gray-500 dark:text-gray-400">Question Paper | Uploaded: 2 Days Ago</span>
+                        </div>
+                        <div class="flex space-x-3 mt-2 md:mt-0">
+                            <button onclick="simulateAction('download', 'Maths QP')" class="flex items-center space-x-1 px-4 py-2 text-sm font-semibold rounded-full text-white bg-primary hover:bg-blue-600 transition duration-200">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                <span>Download</span>
+                            </button>
+                            <button onclick="simulateAction('share', 'Maths QP')" class="p-2 rounded-full text-text-dark dark:text-dark-text bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition duration-200">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.882 14.412 9 15.11 9 15c0 .642-.257 1.284-.717 1.743l-3.321 3.321a1.25 1.25 0 01-1.768 0 1.25 1.25 0 010-1.768l3.32-3.32C6.716 12.757 6.074 12.5 5.432 12.5c-.68 0-1.32.222-1.874.551M15.316 10.658c-.198-1.07-.316-1.768-.316-1.768v-1.25A2.5 2.5 0 0011.25 5h-1.25c-.47 0-.91.184-1.25.514M16 15c0 1.233-.52 2.39-1.385 3.256L10.75 18"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. About Section -->
+        <section id="about" class="py-16 bg-background-light dark:bg-dark-bg transition duration-300">
+            <div class="container mx-auto px-4 text-center max-w-2xl">
+                <h2 class="text-3xl font-heading font-bold mb-4 text-primary">Our Mission: Helping You Succeed</h2>
+                <div class="bg-white dark:bg-dark-card p-6 rounded-xl shadow-lg">
+                    <p class="text-xl text-text-dark dark:text-dark-text font-semibold mb-4">
+                        MereSaathPadhlo is built *by* students, *for* students.
+                    </p>
+                    <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                        We believe that studying should be easy and stress-free. Our goal is simple: provide the best, free study materials in simple language so you can learn easily, save time, and score better in your exams. Stop searching everywhere—start studying here!
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Custom Alert/Modal for Features -->
+        <div id="actionModal" class="fixed inset-0 bg-black bg-opacity-50 dark:bg-opacity-70 backdrop-blur-sm z-50 hidden items-center justify-center p-4 transition-opacity duration-300">
+            <div class="bg-white dark:bg-dark-card p-6 rounded-xl shadow-2xl max-w-sm w-full transform transition-all scale-95 duration-300">
+                <h3 id="modalTitle" class="text-xl font-heading font-bold mb-3 text-primary dark:text-dark-
